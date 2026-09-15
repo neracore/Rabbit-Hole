@@ -1,0 +1,130 @@
+<Window x:Class="RabbitHole.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rabbit Hole"
+        Width="1200" Height="760"
+        MinWidth="980" MinHeight="640"
+        WindowStartupLocation="CenterScreen"
+        Background="#07090F"
+        FontFamily="Segoe UI"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Ideal">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ============ Ambient background ============ -->
+        <Border Grid.RowSpan="3">
+            <Border.Background>
+                <RadialGradientBrush GradientOrigin="0.5,0.12" Center="0.5,0.28" RadiusX="0.9" RadiusY="0.9">
+                    <GradientStop Color="#161D33" Offset="0"/>
+                    <GradientStop Color="#0A0E1A" Offset="0.55"/>
+                    <GradientStop Color="#04060C" Offset="1"/>
+                </RadialGradientBrush>
+            </Border.Background>
+            <Canvas x:Name="ParticleCanvas" ClipToBounds="True"/>
+        </Border>
+
+        <!-- ============ Top bar ============ -->
+        <Border Grid.Row="0" Background="#B20A0E19" BorderBrush="#1C2438" BorderThickness="0,0,0,1" Padding="20,10">
+            <DockPanel LastChildFill="True">
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="🕳" FontSize="15" VerticalAlignment="Center"/>
+                    <TextBlock Text="RABBIT HOLE" Margin="10,0,0,0" FontSize="13" FontWeight="Bold"
+                               Foreground="{StaticResource InkBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Text="an infinite game of impossible connections" Margin="12,1,0,0"
+                               FontSize="11" Foreground="{StaticResource FaintBrush}" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Border x:Name="DepthChip" Background="#1B2334" BorderBrush="#2E3A5A" BorderThickness="1"
+                            CornerRadius="999" Padding="16,5" VerticalAlignment="Center"
+                            RenderTransformOrigin="0.5,0.5">
+                        <Border.RenderTransform>
+                            <ScaleTransform x:Name="DepthChipScale" ScaleX="1" ScaleY="1"/>
+                        </Border.RenderTransform>
+                        <TextBlock x:Name="DepthText" Text="DEPTH —" Foreground="{StaticResource TealBrush}"
+                                   FontSize="12" FontWeight="SemiBold"/>
+                    </Border>
+                    <Button x:Name="EndButton" Content="Surface  ⏏" Style="{StaticResource GhostButton}"
+                            Margin="10,0,0,0" Click="OnEndClick" IsEnabled="False"/>
+                    <Button x:Name="NewButton" Content="New Dive  ↺" Style="{StaticResource GhostButton}"
+                            Margin="8,0,0,0" Click="OnNewClick"/>
+                </StackPanel>
+                <Grid/>
+            </DockPanel>
+        </Border>
+
+        <!-- ============ Center content ============ -->
+        <Grid Grid.Row="1">
+
+            <!-- Start screen -->
+            <Grid x:Name="StartPanel">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="720">
+                    <TextBlock x:Name="StartTitle" Text="RABBIT HOLE" FontSize="66" FontWeight="Light"
+                               Foreground="{StaticResource InkBrush}" HorizontalAlignment="Center"
+                               Effect="{StaticResource TitleGlow}"/>
+                    <TextBlock Text="Every topic is a door. Every door leads somewhere stranger."
+                               FontSize="16" Foreground="{StaticResource DimBrush}" FontStyle="Italic"
+                               HorizontalAlignment="Center" Margin="0,14,0,0" TextAlignment="Center"/>
+                    <Border Margin="0,46,0,0" HorizontalAlignment="Center">
+                        <TextBlock x:Name="EnterText" Text="PRESS   ENTER   TO   FALL"
+                                   FontSize="19" FontWeight="SemiBold" Foreground="{StaticResource TealBrush}"/>
+                    </Border>
+                    <TextBlock Text="no login · no ads · no tracking · fully offline"
+                               FontSize="11.5" Foreground="{StaticResource FaintBrush}"
+                               HorizontalAlignment="Center" Margin="0,26,0,0"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Topic screen -->
+            <Grid x:Name="TopicPanel" Visibility="Collapsed">
+                <ScrollViewer x:Name="TopicScroll" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="TopicCard" MaxWidth="840" Margin="24,12"
+                                HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel.RenderTransform>
+                            <TranslateTransform x:Name="CardTranslate"/>
+                        </StackPanel.RenderTransform>
+                        <ContentControl x:Name="CategoryChip" Style="{StaticResource Chip}" Content="…"
+                                        HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="TopicTitle" FontSize="46" FontWeight="SemiBold"
+                                   Foreground="{StaticResource InkBrush}" HorizontalAlignment="Center"
+                                   TextAlignment="Center" TextWrapping="Wrap" Margin="0,20,0,0"/>
+                        <TextBlock x:Name="TopicTagline" FontSize="16" FontStyle="Italic"
+                                   Foreground="{StaticResource DimBrush}" HorizontalAlignment="Center"
+                                   TextAlignment="Center" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                        <StackPanel x:Name="FactsPanel" Margin="0,32,0,0"/>
+                        <Button x:Name="GoDeeperButton" Style="{StaticResource DiveButton}"
+                                Content="GO DEEPER   ↓" HorizontalAlignment="Center" Margin="0,36,0,0"
+                                Click="OnGoDeeperClick"/>
+                        <TextBlock x:Name="HintText" Text="ENTER or SPACE to fall deeper  ·  ESC to surface"
+                                   FontSize="12" Foreground="{StaticResource FaintBrush}"
+                                   HorizontalAlignment="Center" Margin="0,18,0,6"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- Journey screen -->
+            <Grid x:Name="JourneyPanel" Visibility="Collapsed">
+                <ScrollViewer x:Name="JourneyScroll" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="JourneyContent" MaxWidth="760" Margin="24,16"
+                                HorizontalAlignment="Center"/>
+                </ScrollViewer>
+            </Grid>
+
+        </Grid>
+
+        <!-- ============ Bottom trail ============ -->
+        <Border x:Name="TrailBar" Grid.Row="2" Background="#AA0A0E19" BorderBrush="#1C2438"
+                BorderThickness="0,1,0,0" Padding="16,8" Visibility="Collapsed">
+            <ScrollViewer x:Name="TrailScroll" HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="TrailPanel" Orientation="Horizontal" VerticalAlignment="Center"/>
+            </ScrollViewer>
+        </Border>
+
+    </Grid>
+</Window>

@@ -1,0 +1,119 @@
+<Application x:Class="RabbitHole.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+
+    <Application.Resources>
+
+        <!-- ================= Palette ================= -->
+        <SolidColorBrush x:Key="InkBrush" Color="#E9EDF9"/>
+        <SolidColorBrush x:Key="DimBrush" Color="#8B94AB"/>
+        <SolidColorBrush x:Key="FaintBrush" Color="#59617A"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#8B7CFF"/>
+        <SolidColorBrush x:Key="AccentFaintBrush" Color="#4A4380"/>
+        <SolidColorBrush x:Key="TealBrush" Color="#4FE3C1"/>
+        <SolidColorBrush x:Key="PanelBrush" Color="#121826"/>
+        <SolidColorBrush x:Key="PanelBorderBrush" Color="#232C42"/>
+
+        <DropShadowEffect x:Key="TitleGlow" Color="#6C5CE7" Opacity="0.55" BlurRadius="34" ShadowDepth="0"/>
+        <DropShadowEffect x:Key="SoftShadow" Color="#000000" Opacity="0.45" BlurRadius="28" ShadowDepth="8"/>
+
+        <!-- ================= Ghost button ================= -->
+        <Style x:Key="GhostButton" TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource InkBrush}"/>
+            <Setter Property="Background" Value="#141A28"/>
+            <Setter Property="BorderBrush" Value="#2A3450"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#1D2638"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#3D4A6E"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#232E45"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ================= Dive button ================= -->
+        <Style x:Key="DiveButton" TargetType="Button">
+            <Setter Property="Foreground" Value="#F2EFFF"/>
+            <Setter Property="Background" Value="#241E4E"/>
+            <Setter Property="BorderBrush" Value="#6C5CE7"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="34,12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="1.5"
+                                CornerRadius="12"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#2E2664"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#8B7CFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#191440"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ================= Category chip ================= -->
+        <Style x:Key="Chip" TargetType="ContentControl">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Border Background="#1B2334"
+                                BorderBrush="#2E3A5A"
+                                BorderThickness="1"
+                                CornerRadius="999"
+                                Padding="14,4">
+                            <TextBlock Text="{TemplateBinding Content}"
+                                       Foreground="{StaticResource TealBrush}"
+                                       FontSize="11"
+                                       FontWeight="SemiBold"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Application.Resources>
+</Application>

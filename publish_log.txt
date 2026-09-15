@@ -1,0 +1,4 @@
+  Determining projects to restore...
+  Failed to download package 'Microsoft.NETCore.App.Runtime.win-x64.8.0.0' from 'https://api.nuget.org/v3-flatcontainer/microsoft.netcore.app.runtime.win-x64/8.0.0/microsoft.netcore.app.runtime.win-x64.8.0.0.nupkg'.
+  Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host..
+    An existing connection was forcibly closed by the remote host.

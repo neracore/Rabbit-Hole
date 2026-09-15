@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>RabbitHole</RootNamespace>
+    <AssemblyName>RabbitHole</AssemblyName>
+    <Version>1.0.0</Version>
+    <Product>Rabbit Hole</Product>
+    <AssemblyTitle>Rabbit Hole</AssemblyTitle>
+    <Description>An infinite knowledge-exploration game. Press ENTER, fall in, and see where the trail ends.</Description>
+    <Authors>Rabbit Hole</Authors>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <TargetLatestRuntimePatch>false</TargetLatestRuntimePatch>
+    <RuntimeFrameworkVersion>8.0.30</RuntimeFrameworkVersion>
+  </PropertyGroup>
+
+  <!-- SmokeTest has its own project file; keep its sources out of this one. -->
+  <ItemGroup>
+    <Compile Remove="SmokeTest\**" />
+    <None Remove="SmokeTest\**" />
+  </ItemGroup>
+
+</Project>
